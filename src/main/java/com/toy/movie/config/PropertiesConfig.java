@@ -5,6 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 
+
+/**
+ * packageName    : com.toy.movie.config
+ * fileName       : PropertiesConfig.java
+ * author         : shipowner
+ * date           : 2023-09-11
+ * description    : 외부 환경 변수 불러오는 설정
+ */
 @Configuration
 public class PropertiesConfig {
 

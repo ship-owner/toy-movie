@@ -4,6 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * packageName    : com.toy.movie.dto
+ * fileName       : ProviderDto.java
+ * author         : shipowner
+ * date           : 2023-09-11
+ * description    : OTT 정보 DTO
+ */
 @Getter
 @Setter
 @NoArgsConstructor
