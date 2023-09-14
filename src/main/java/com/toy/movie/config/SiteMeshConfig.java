@@ -1,0 +1,36 @@
+package com.toy.movie.config;
+
+import org.sitemesh.builder.SiteMeshFilterBuilder;
+import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * packageName    : com.toy.movie.core.config
+ * fileName       : SiteMeshConfig
+ * author         : shipowner
+ * date           : 2023-09-14
+ * description    :
+ */
+
+@Configuration
+public class SiteMeshConfig extends ConfigurableSiteMeshFilter {
+
+    @Override
+    protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
+        builder
+                .addDecoratorPath("/*", 		"/default.jsp")
+                .setMimeTypes("text/html");
+    }
+
+    @Bean
+    public FilterRegistrationBean<SiteMeshConfig> siteMeshFilter() {
+        FilterRegistrationBean<SiteMeshConfig> filter = new FilterRegistrationBean<>();
+        filter.setFilter(new SiteMeshConfig());
+
+        return filter;
+
+    }
+
+}
