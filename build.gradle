@@ -37,10 +37,19 @@ dependencies {
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
 	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+	implementation 'org.sitemesh:sitemesh:3.2.0-M2'
 
-	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
-	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.2.0'
-	implementation group: 'org.json', name: 'json', version: '20230618'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.security:spring-security-taglibs:6.1.4'
+
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	implementation 'org.apache.httpcomponents:httpclient:4.3.4'
+	implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+	implementation 'org.json:json:20230618'
 
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'
