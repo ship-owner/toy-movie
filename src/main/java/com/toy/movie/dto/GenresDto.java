@@ -6,18 +6,18 @@ import lombok.Setter;
 
 /**
  * packageName    : com.toy.movie.dto
- * fileName       : ProviderDto
+ * fileName       : GenresDto
  * author         : shipowner
  * date           : 2023-09-11
- * description    : OTT 정보 DTO
+ * description    : 영화 장르
  */
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProviderDto {
+public class GenresDto {
 
-    private Integer providerId;
-    private String logoPath;
-    private String providerName;
+    private Integer id;
+    private String name;
 
 }

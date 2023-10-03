@@ -3,7 +3,6 @@ package com.toy.movie.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieDto {
 
     private Integer id;
@@ -39,7 +37,13 @@ public class MovieDto {
     //회사
     private List<Map> productionCompanies;
 
-    private List<ProviderDto> providerList;
+    private List<ProviderDto> flatrateList;
+    private List<ProviderDto> buyList;
+    private List<ProviderDto> rentList;
+
+    private List<ActorDto> actorList;
+
+    private List<CommentDto> commentList;
 
 
 }

@@ -3,15 +3,11 @@ package com.toy.movie.external;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.toy.movie.dto.GenresDto;
-import com.toy.movie.dto.MovieDto;
-import com.toy.movie.dto.MovieSearchDto;
-import com.toy.movie.dto.ProviderDto;
+import com.toy.movie.dto.*;
 import io.micrometer.common.util.StringUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -41,7 +37,7 @@ public class TmdbApiModule {
      * methodName : getMovieTrends
      * author : shipowner
      * description : 최신 인기 영화 목록 조회
-     * @return list
+     *
      */
     public List<MovieDto> getMovieTrends() {
         List<MovieDto> movieList = null;
@@ -64,7 +60,6 @@ public class TmdbApiModule {
                             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                             .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
-                    movieList = new ArrayList<>();
                     movieList = Arrays.asList(mapper.readValue(results, MovieDto[].class));
                 }
             }
@@ -80,9 +75,9 @@ public class TmdbApiModule {
      * methodName : getMovieProviders
      * author : shipowner
      * description : 전체 OTT 조회
-     * @return list
+     *
      */
-    public List<ProviderDto> getMovieProviders() {
+    public List<ProviderDto> getProviders() {
         List<ProviderDto> providerList = null;
 
         try {
@@ -105,7 +100,6 @@ public class TmdbApiModule {
                             .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
 
-                    providerList = new ArrayList<>();
                     providerList = Arrays.asList(mapper.readValue(results, ProviderDto[].class));
                 }
             }
@@ -120,9 +114,9 @@ public class TmdbApiModule {
      * methodName : getMovieGenres
      * author : shipowner
      * description : 전체 장르 조회
-     * @return list
+     *
      */
-    public List<GenresDto> getMovieGenres(){
+    public List<GenresDto> getGenres(){
         List<GenresDto> genresList = null;
 
         try {
@@ -143,7 +137,6 @@ public class TmdbApiModule {
                             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                             .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
-                    genresList = new ArrayList<>();
                     genresList = Arrays.asList(mapper.readValue(genres, GenresDto[].class));
 
                     System.out.println();
@@ -161,10 +154,9 @@ public class TmdbApiModule {
      * methodName : findMovieDetailByMovieId
      * author : shipowner
      * description : 영화 정보 상세 조회
-     * @param movieId
-     * @return movie dto
+     *
      */
-    public MovieDto findMovieDetailByMovieId(Integer movieId){
+    public MovieDto findDetailByMovieId(Integer movieId){
         MovieDto movieDto = null;
 
         try {
@@ -192,17 +184,51 @@ public class TmdbApiModule {
     }
 
     /**
-     * methodName : findMovieProviderByMovieId
+     * methodName : findAcotrsByMovieId
      * author : shipowner
-     * description : 영화 OTT 제공 목록 조회
-     * @param movieId
-     * @return list
+     * description : 영화 출연 배우 조회
+     *
      */
-    public List<ProviderDto> findMovieProviderByMovieId(Integer movieId){
-        List<ProviderDto> providerList = null;
+    public List<ActorDto> findAcotrsByMovieId(Integer movieId){
+        List<ActorDto> actorList = null;
 
         try {
-            String baseUrl = tmdbApiUrl + "/movie/"+movieId+"/watch/providers";
+            String baseUrl = tmdbApiUrl + "/movie/" + movieId + "/credits";
+
+            Map<String, String> queryParams = new HashMap<>();
+            queryParams.put("language", language);
+
+            String jsonData = this.getResponseText(baseUrl, queryParams);
+
+            if(StringUtils.isNotBlank(jsonData)) {
+                JSONObject jsonObject = new JSONObject(jsonData);
+
+                if(jsonObject.has("cast")) {
+                    String genres = jsonObject.get("cast").toString();
+
+                    ObjectMapper mapper = new ObjectMapper()
+                            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                            .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+
+                    actorList = Arrays.asList(mapper.readValue(genres, ActorDto[].class));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return actorList;
+    }
+
+    /**
+     * methodName : findProviderByMovieId
+     * author : shipowner
+     * description : 영화 OTT 제공 목록 조회
+     *
+     */
+    public void findProviderByMovieId(MovieDto movieDto){
+        try {
+            String baseUrl = tmdbApiUrl + "/movie/"+movieDto.getId()+"/watch/providers";
 
             String jsonData = this.getResponseText(baseUrl, null);
 
@@ -210,30 +236,42 @@ public class TmdbApiModule {
                 JSONObject jsonObject = new JSONObject(jsonData);
 
                 if(jsonObject.has("results")) {
-                    String results = jsonObject.get("results").toString();
+                    JSONObject results = jsonObject.getJSONObject("results");
 
-                    ObjectMapper mapper = new ObjectMapper()
-                            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                            .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+                    if(results.has("KR")) {
+                        JSONObject kr = results.getJSONObject("KR");
 
+                        ObjectMapper mapper = new ObjectMapper()
+                                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                                .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
-                    providerList = new ArrayList<>();
-                    providerList = Arrays.asList(mapper.readValue(results, ProviderDto[].class));
+                        if(kr.has("flatrate")) {
+                            String flatrate = kr.get("flatrate").toString();
+                            movieDto.setFlatrateList(Arrays.asList(mapper.readValue(flatrate, ProviderDto[].class)));
+                        }
+
+                        if(kr.has("buy")) {
+                            String buy = kr.get("buy").toString();
+                            movieDto.setBuyList(Arrays.asList(mapper.readValue(buy, ProviderDto[].class)));
+                        }
+
+                        if(kr.has("rent")) {
+                            String rent = kr.get("rent").toString();
+                            movieDto.setRentList(Arrays.asList(mapper.readValue(rent, ProviderDto[].class)));
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return providerList;
     }
 
     /**
      * methodName : findMovieList
      * author : shipowner
      * description : 필터를 통한 영화 목록 조회
-     * @param movieSearchDto
-     * @return list
+     *
      */
     public List<MovieDto> findMovieList(MovieSearchDto movieSearchDto){
         List<MovieDto> movieList = null;
@@ -244,8 +282,18 @@ public class TmdbApiModule {
             Map<String, String> queryParams = new HashMap<>();
             queryParams.put("language", language);
 
-            if(StringUtils.isNotBlank(movieSearchDto.getPage())) queryParams.put("page",movieSearchDto.getPage());
-            if(StringUtils.isNotBlank(movieSearchDto.getYear())) queryParams.put("year",movieSearchDto.getYear());
+            if(StringUtils.isNotBlank(movieSearchDto.getPage()))
+                queryParams.put("page",movieSearchDto.getPage());
+            if(StringUtils.isNotBlank(movieSearchDto.getYear()))
+                queryParams.put("year",movieSearchDto.getYear());
+            if(StringUtils.isNotBlank(movieSearchDto.getRegion()))
+                queryParams.put("region",movieSearchDto.getRegion());
+            if(StringUtils.isNotBlank(movieSearchDto.getSortBy()))
+                queryParams.put("sort_by",movieSearchDto.getSortBy());
+            if(StringUtils.isNotBlank(movieSearchDto.getReleaseDateLte()))
+                queryParams.put("release_date.lte",movieSearchDto.getReleaseDateLte());
+            if(StringUtils.isNotBlank(movieSearchDto.getReleaseDateGte()))
+                queryParams.put("release_date.gte",movieSearchDto.getReleaseDateGte());
             if(movieSearchDto.getWithGenres() != null && movieSearchDto.getWithGenres().size() > 0)
                 queryParams.put("with_genres",String.join("|",movieSearchDto.getWithGenres()));
             if(movieSearchDto.getWithCompanies() != null && movieSearchDto.getWithCompanies().size() > 0)
@@ -267,7 +315,6 @@ public class TmdbApiModule {
                             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                             .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
-                    movieList = new ArrayList<>();
                     movieList = Arrays.asList(mapper.readValue(results, MovieDto[].class));
                 }
             }

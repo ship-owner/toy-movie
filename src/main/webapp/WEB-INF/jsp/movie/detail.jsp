@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -19,80 +20,81 @@
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
                         <div class="col-lg-3">
-                            <div class="d-flex align-items-center mt-lg-5 mb-4">
-                                <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
-                                <div class="ms-3">
-                                    <div class="fw-bold">Valerie Luna</div>
-                                    <div class="text-muted">News, Business</div>
+                            <c:forEach items="${movie.actorList}" var="actor">
+                                <div class="d-flex align-items-center mt-lg-5 mb-4">
+                                    <img class="img-fluid rounded-circle" style="width: 50px; height: 50px;" src="https://image.tmdb.org/t/p/w500<c:out value="${actor.profilePath}" />" alt="..." />
+                                    <div class="ms-3">
+                                        <div class="fw-bold"><c:out value="${actor.name}" /></div>
+                                        <div class="text-muted"><c:out value="${actor.character}" /></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
                         <div class="col-lg-9">
                             <!-- Post content-->
                             <article>
                                 <!-- Post header-->
                                 <header class="mb-4">
+                                    <input id="movieId" type="hidden" value="<c:out value="${movie.id}" />" />
                                     <!-- Post title-->
-                                    <h1 class="fw-bolder mb-1">Welcome to Blog Post!</h1>
+                                    <h1 class="fw-bolder mb-1"><c:out value="${movie.title}" /></h1>
                                     <!-- Post meta content-->
-                                    <div class="text-muted fst-italic mb-2">January 1, 2023</div>
+                                    <div class="text-muted fst-italic mb-2"><c:out value="${movie.releaseDate}" /></div>
                                     <!-- Post categories-->
-                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
-                                </header>
-                                <!-- Preview image figure-->
-                                <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
-                                <!-- Post content-->
-                                <section class="mb-5">
-                                    <p class="fs-5 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe.</p>
-                                    <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                                    <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                                    <h2 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h2>
-                                    <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day and I realized I could hold them to myself or share them with people who might be interested.</p>
-                                    <p class="fs-5 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened there because we're twirling knobs here on Earth without knowing the consequences of it. Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
-                                </section>
-                            </article>
-                            <!-- Comments section-->
-                            <section>
-                                <div class="card bg-light">
-                                    <div class="card-body">
-                                        <!-- Comment form-->
-                                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                                        <!-- Comment with nested comments-->
-                                        <div class="d-flex mb-4">
-                                            <!-- Parent comment-->
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                                <!-- Child comment 1-->
-                                                <div class="d-flex mt-4">
-                                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                                    <div class="ms-3">
-                                                        <div class="fw-bold">Commenter Name</div>
-                                                        And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                                    </div>
-                                                </div>
-                                                <!-- Child comment 2-->
-                                                <div class="d-flex mt-4">
-                                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                                    <div class="ms-3">
-                                                        <div class="fw-bold">Commenter Name</div>
-                                                        When you put money directly to a problem, it makes a good headline.
-                                                    </div>
-                                                </div>
+
+                                    <div class="tab-container">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-flatrate-tab" data-bs-toggle="tab" data-bs-target="#nav-flatrate" type="button" role="tab" aria-controls="nav-flatrate" aria-selected="true">정액제</button>
+                                                <button class="nav-link" id="nav-rent-tab" data-bs-toggle="tab" data-bs-target="#nav-rent" type="button" role="tab" aria-controls="nav-rent" aria-selected="false">대여</button>
+                                                <button class="nav-link" id="nav-buy-tab" data-bs-toggle="tab" data-bs-target="#nav-buy" type="button" role="tab" aria-controls="nav-buy" aria-selected="false">구매</button>
                                             </div>
-                                        </div>
-                                        <!-- Single comment-->
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-flatrate" role="tabpanel" aria-labelledby="nav-flatrate-tab" tabindex="0" style="margin-top: 5px;">
+                                                <c:if test="${not empty movie.flatrateList}">
+                                                    <c:forEach items="${movie.flatrateList}" var="provider">
+                                                        <a class="navbar-brand" href="#" style="margin-left: 6px; font-size: 17px; font-weight: 700; line-height: 21px; letter-spacing: -.1px;">
+                                                            <img src="https://image.tmdb.org/t/p/w500/<c:out value="${provider.logoPath}" />" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                                                            <c:out value="${provider.providerName}" />
+                                                        </a>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-rent" role="tabpanel" aria-labelledby="nav-rent-tab" tabindex="0" style="margin-top: 5px;">
+                                                <c:if test="${not empty movie.rentList}">
+                                                    <c:forEach items="${movie.rentList}" var="provider">
+                                                        <a class="navbar-brand" href="#" style="margin-left: 6px; font-size: 17px; font-weight: 700; line-height: 21px; letter-spacing: -.1px;">
+                                                            <img src="https://image.tmdb.org/t/p/w500/<c:out value="${provider.logoPath}" />" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                                                            <c:out value="${provider.providerName}" />
+                                                        </a>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab" tabindex="0" style="margin-top: 5px;">
+                                                <c:if test="${not empty movie.buyList}">
+                                                    <c:forEach items="${movie.buyList}" var="provider">
+                                                        <a class="navbar-brand" href="#" style="margin-left: 6px; font-size: 17px; font-weight: 700; line-height: 21px; letter-spacing: -.1px;">
+                                                            <img src="https://image.tmdb.org/t/p/w500/<c:out value="${provider.logoPath}" />" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                                                            <c:out value="${provider.providerName}" />
+                                                        </a>
+                                                    </c:forEach>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
+                                </header>
+                                <!-- Preview image figure-->
+                                <figure class="mb-4"><img class="img-fluid rounded" src="https://image.tmdb.org/t/p/w500<c:out value="${movie.backdropPath}" />" alt="..." /></figure>
+                                <!-- Post content-->
+                                <section class="mb-5">
+                                    <p class="fs-5 mb-4"><c:out value="${movie.overview}" /></p>
+                                </section>
+                            </article>
+
+                            <!-- Comments section-->
+                            <section id="comments">
                             </section>
                         </div>
                     </div>
@@ -100,7 +102,16 @@
             </section>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        function loadComment(){
+            $("#comments").load("<c:url value="/comment/${movie.id}" />")
+        }
+
+        $(document).ready(function (){
+            loadComment();
+        });
+    </script>
     </body>
 </html>

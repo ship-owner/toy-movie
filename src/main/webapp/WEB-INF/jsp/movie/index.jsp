@@ -15,97 +15,97 @@
         <link href="/static/css/styles.css" type="text/css" rel="stylesheet" />
 
         <style>
-            #carousel {
+            #latest_carousel {
                 position: relative;
                 overflow: hidden;
                 height: 700px;
                 width: 100%;
             }
 
-            #carousel > div {
+            #latest_carousel > div {
                 position: absolute;
                 transition: transform 1s, left 1s, opacity 1s, z-index 0s;
                 opacity: 1;
             }
 
-            #carousel div img {
+            #latest_carousel div img {
                 width: 400px;
                 transition: width 1s;
             }
 
-            #carousel div.hide {
+            #latest_carousel div.hide {
                 display: none;
             }
 
-            #carousel div.hide img{
+            #latest_carousel div.hide img{
                 width: 200px;
             }
 
-            #carousel div.hideLeft {
+            #latest_carousel div.hideLeft {
                 left: 0%;
                 opacity: 0;
                 transform: translateY(50%) translateX(-50%);
             }
 
-            #carousel div.hideLeft img {
+            #latest_carousel div.hideLeft img {
                 width: 200px;
             }
 
-            #carousel div.hideRight {
+            #latest_carousel div.hideRight {
                 left: 100%;
                 opacity: 0;
                 transform: translateY(50%) translateX(-50%);
             }
 
-            #carousel div.hideRight img {
+            #latest_carousel div.hideRight img {
                 width: 200px;
             }
 
-            #carousel div.prev {
+            #latest_carousel div.prev {
                 z-index: 5;
                 left: 30%;
                 transform: translateY(50px) translateX(-50%);
             }
 
-            #carousel div.prev img {
+            #latest_carousel div.prev img {
                 width: 300px;
             }
 
-            #carousel div.prevLeftSecond {
+            #latest_carousel div.prevLeftSecond {
                 z-index: 4;
                 left: 15%;
                 transform: translateY(50%) translateX(-50%);
                 opacity: .7;
             }
 
-            #carousel div.prevLeftSecond img {
+            #latest_carousel div.prevLeftSecond img {
                 width: 200px;
             }
 
-            #carousel div.selected {
+            #latest_carousel div.selected {
                 z-index: 10;
                 left: 50%;
                 transform: translateY(0px) translateX(-50%);
             }
 
-            #carousel div.next {
+            #latest_carousel div.next {
                 z-index: 5;
                 left: 70%;
                 transform: translateY(50px) translateX(-50%);
             }
 
-            #carousel div.next img {
+            #latest_carousel div.next img {
                 width: 300px;
             }
 
-            #carousel div.nextRightSecond {
+            #latest_carousel div.nextRightSecond {
                 z-index: 4;
                 left: 85%;
                 transform: translateY(50%) translateX(-50%);
                 opacity: .7;
             }
 
-            #carousel div.nextRightSecond img {
+            #latest_carousel div.nextRightSecond img {
                 width: 200px;
             }
 
@@ -183,35 +183,35 @@
 
 
 
-            #carousel div.prevLeftSecond .profile-name,
-            #carousel div.hideLeft .profile-name,
-            #carousel div.nextRightSecond .profile-name,
-            #carousel div.hideRight .profile-name {
+            #latest_carousel div.prevLeftSecond .profile-name,
+            #latest_carousel div.hideLeft .profile-name,
+            #latest_carousel div.nextRightSecond .profile-name,
+            #latest_carousel div.hideRight .profile-name {
                 font-size: 11px;
             }
 
-            #carousel div.prev .profile-name,
-            #carousel div.next .profile-name {
+            #latest_carousel div.prev .profile-name,
+            #latest_carousel div.next .profile-name {
                 font-size: 15px;
             }
 
-            #carousel div.selected .profile-name {
+            #latest_carousel div.selected .profile-name {
                 font-size: 20px;
             }
 
-            #carousel div.prevLeftSecond .profile-overview,
-            #carousel div.hideLeft .profile-overview,
-            #carousel div.nextRightSecond .profile-overview,
-            #carousel div.hideRight .profile-overview {
+            #latest_carousel div.prevLeftSecond .profile-overview,
+            #latest_carousel div.hideLeft .profile-overview,
+            #latest_carousel div.nextRightSecond .profile-overview,
+            #latest_carousel div.hideRight .profile-overview {
                 font-size: 11px;
             }
 
-            #carousel div.prev .profile-overview,
-            #carousel div.next .profile-overview {
+            #latest_carousel div.prev .profile-overview,
+            #latest_carousel div.next .profile-overview {
                 font-size: 15px;
             }
 
-            #carousel div.selected .profile-overview {
+            #latest_carousel div.selected .profile-overview {
                 font-size: 20px;
             }
 
@@ -219,31 +219,33 @@
                 font-size: inherit;
             }
         </style>
-        </style>
     </head>
     <body class="d-flex flex-column h-100">
             <!-- Header-->
             <header class="bg-dark py-5">
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center justify-content-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-5 fw-bolder text-white mb-2">엘리멘탈</h1>
-                                <p class="lead fw-normal text-white-50 mb-4">불, 물, 공기, 흙 4개의 원소들이 살고 있는 엘리멘트 시티. 재치 있고 불처럼 열정 넘치는 앰버는 어느 날 우연히 유쾌하고 감성적이며 물 흐르듯 사는 웨이드를 만나 특별한 우정을 쌓으며, 지금껏 믿어온 모든 것들이 흔들리는 새로운 경험을 하게 되는데...</p>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">상세보기</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" style="height: 400px;" src="https://image.tmdb.org/t/p/w500/1YYL1OcgjPLjAGi6n0iZe1gdl9i.jpg" alt="..." /></div>
+                <div id="movieTrendCarousel" class="carousel slide container px-5" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="movie_trend">
+                        <div class="carousel-indicators" id="movie_trend_indicators"></div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#movieTrendCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#movieTrendCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <div class="py-5" id="carousel"></div>
             </header>
+
+            <section class="bg-dark py-5">
+                <h2 class="fw-bolder" style="color: white; text-align: center;">최신 개봉작</h2>
+                <div class="py-5" id="latest_carousel"></div>
+            </section>
 
 
             <!-- Features section-->
-            <section class="py-5" id="features">
+            <%--<section class="py-5" id="features">
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">A better way to start building.</h2></div>
@@ -273,9 +275,9 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>--%>
             <!-- Testimonial section-->
-            <div class="py-5 bg-light">
+            <%--<div class="py-5 bg-light">
                 <div class="container px-5 my-5">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-10 col-xl-7">
@@ -293,7 +295,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <!-- Blog preview section-->
             <section class="py-5">
                 <div class="container px-5 my-5">
@@ -371,7 +373,7 @@
                         </div>
                     </div>
                     <!-- Call to action-->
-                    <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+                   <%-- <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
                         <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                             <div class="mb-4 mb-xl-0">
                                 <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
@@ -385,15 +387,13 @@
                                 <div class="small text-white-50">We care about privacy, and will never share your data.</div>
                             </div>
                         </div>
-                    </aside>
+                    </aside>--%>
                 </div>
             </section>
 
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-            <script src="js/scripts.js"></script>
         <script>
             function moveToSelected(element) {
                 if (element == "next") {
@@ -408,23 +408,23 @@
 
                 if ($(selected).length === 0) {
                     if (element == "next") {
-                        selected = $("#carousel > div:first");
+                        selected = $("#latest_carousel > div:first");
                     } else if (element == "prev") {
-                        selected = $("#carousel > div:last");
+                        selected = $("#latest_carousel > div:last");
                     }
                 }
 
                 var prev = $(selected).prev();
-                if(prev.length === 0) prev = $("#carousel > div:last");
+                if(prev.length === 0) prev = $("#latest_carousel > div:last");
 
                 var next = $(selected).next();
-                if(next.length === 0) next = $("#carousel > div:first");
+                if(next.length === 0) next = $("#latest_carousel > div:first");
 
                 var prevSecond = $(prev).prev();
-                if(prevSecond.length === 0) prevSecond = $("#carousel > div:last");
+                if(prevSecond.length === 0) prevSecond = $("#latest_carousel > div:last");
 
                 var nextSecond = $(next).next();
-                if(nextSecond.length === 0) nextSecond = $("#carousel > div:first");
+                if(nextSecond.length === 0) nextSecond = $("#latest_carousel > div:first");
 
                 $(selected).removeClass().addClass("selected");
                 $(selected).siblings().removeClass().addClass("hide");
@@ -436,10 +436,10 @@
                 $(nextSecond).removeClass().addClass("nextRightSecond");
 
                 $(prevSecond).prev().removeClass().addClass('hideLeft');
-                if($(prevSecond).prev().length === 0) $("#carousel > div:last").removeClass().addClass('hideLeft');
+                if($(prevSecond).prev().length === 0) $("#latest_carousel > div:last").removeClass().addClass('hideLeft');
 
                 $(nextSecond).next().removeClass().addClass('hideRight');
-                if($(nextSecond).next().length === 0) $("#carousel > div:first").removeClass().addClass('hideRight');
+                if($(nextSecond).next().length === 0) $("#latest_carousel > div:first").removeClass().addClass('hideRight');
 
             }
 
@@ -467,57 +467,105 @@
                 moveToSelected('next');
             });
 
-            function fetchMovieTrendData(){
+            function fetchLatestMovieData(){
                 $.ajax({
                     type : "GET",            // HTTP method type(GET, POST) 형식이다.
-                    url : "/movie/trends",      // 컨트롤러에서 대기중인 URL 주소이다.
+                    url : "/movie/latest",      // 컨트롤러에서 대기중인 URL 주소이다.
                     success : function(data){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-                        for (var i=0; i < data.length; i++){
-                            var movie = data[i];
-                            var classNm;
-
-                            if(i === 0) classNm = "prevLeftSecond";
-                            else if(i === 1) classNm = "prev";
-                            else if(i === 2) classNm = "selected";
-                            else if(i === 3) classNm = "next";
-                            else if(i === 4) classNm = "nextRightSecond";
-                            else classNm = "hideRight";
-
-                            var divHtml = '<div class="'+classNm+'">';
-                            divHtml += '<div class="profile-card-6"><img src="https://image.tmdb.org/t/p/w500'+movie.posterPath+'">';
-                            divHtml += '<div class="profile-name">'+movie.title+'</div>';
-                            divHtml += '<div class="profile-overview">';
-                            divHtml += '<div class="row text-center">';
-                            divHtml += '<div class="col-xs-4">';
-                            divHtml += '<p>평점</p>';
-                            divHtml += '<h3>'+ movie.voteAverage.toFixed(1)+'</h3>';
-                            divHtml += '</div>';
-                            divHtml += '<div class="col-xs-4">';
-                            divHtml += '<p>개봉일</p>';
-                            divHtml += '<h3>'+movie.releaseDate+'</h3>';
-                            divHtml += '</div>';
-                            divHtml += '</div>';
-                            divHtml += '</div>';
-                            divHtml += '</div>';
-                            divHtml += '<input name="movieId" type="hidden" value="'+movie.id+'" ">';
-                            divHtml += '</div>';
-
-                            $('#carousel').append(divHtml);
-                        }
-
+                        renderLatestMovies(data);
                     }
                 });
             }
 
+            function renderLatestMovies(movieList){
+                for (var i=0; i < movieList.length; i++){
+                    var movie = movieList[i];
+                    var classNm;
+
+                    if(i === 0) classNm = "prevLeftSecond";
+                    else if(i === 1) classNm = "prev";
+                    else if(i === 2) classNm = "selected";
+                    else if(i === 3) classNm = "next";
+                    else if(i === 4) classNm = "nextRightSecond";
+                    else classNm = "hideRight";
+
+                    var divHtml = '<div class="'+classNm+'">';
+                    divHtml += '<div class="profile-card-6"><img src="https://image.tmdb.org/t/p/w500'+movie.posterPath+'">';
+                    divHtml += '<div class="profile-name">'+movie.title+'</div>';
+                    divHtml += '<div class="profile-overview">';
+                    divHtml += '<div class="row text-center">';
+                    divHtml += '<div class="col-xs-4">';
+                    divHtml += '<p>평점</p>';
+                    divHtml += '<h3>'+ movie.voteAverage.toFixed(1)+'</h3>';
+                    divHtml += '</div>';
+                    divHtml += '<div class="col-xs-4">';
+                    divHtml += '<p>개봉일</p>';
+                    divHtml += '<h3>'+movie.releaseDate+'</h3>';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+                    divHtml += '<input name="movieId" type="hidden" value="'+movie.id+'" ">';
+                    divHtml += '</div>';
+
+                    $('#latest_carousel').append(divHtml);
+                }
+            }
+
+            function fetchTrendMovieData(){
+                $.ajax({
+                    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+                    url : "/movie/trend",      // 컨트롤러에서 대기중인 URL 주소이다.
+                    success : function(data){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                        console.log(data);
+                        renderMovieTrend(data);
+                    }
+                });
+            }
+
+            function renderMovieTrend(movieList){
+                var i = Math.floor(Math.random()*movieList.length);
+
+                for (var i=0; i<movieList.length; i++) {
+                    if(i===10) break;
+
+                    var movie = movieList[i];
+
+                    var divHtml = '<div class="carousel-item '+ (i===0 ? 'active' : '') +'">';
+                    divHtml += '<div class="row gx-5 align-items-center justify-content-center">';
+                    divHtml += '<div class="col-lg-8 col-xl-7 col-xxl-6">';
+                    divHtml += '<div class="my-5 text-center text-xl-start">';
+                    divHtml += '<h1 class="display-5 fw-bolder text-white mb-2">' + movie.title + '</h1>';
+                    divHtml += '<p class="lead fw-normal text-white-50 mb-4">' + movie.overview + '</p>';
+                    divHtml += '<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">';
+                    divHtml += '<a class="btn btn-primary btn-lg px-4 me-sm-3" href="<c:url value="/movie/detail" />/' + movie.id + '">상세보기</a>';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+                    divHtml += '<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center" style="flex: 0 0 350px; width: 50%;">';
+                    divHtml += '<img class="img-fluid rounded-3 my-5" style="height:400px;" src="https://image.tmdb.org/t/p/w500' + movie.posterPath + '" alt="..." />';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+                    divHtml += '</div>';
+
+                    $('#movie_trend').append(divHtml);
+
+                    var indicatorHtml = '<button type="button" data-bs-target="#movieTrendCarousel" data-bs-slide-to="'+i+'" '+ (i===0 ? 'class="active" aria-current="true"' : '') +' ></button>';
+
+                    $('#movie_trend_indicators').append(indicatorHtml);
+                }
+            }
+
             $(document).ready(function (){
-                fetchMovieTrendData();
+                fetchTrendMovieData();
+                fetchLatestMovieData();
 
                 $(document).on('click', '.selected', function(){
                     var movieId = $(this).find("input[name=movieId]").val();
                     window.location.href = "<c:url value="/movie/detail" />/" + movieId;
                 });
 
-                $(document).on('click', '#carousel > div', function(){
+                $(document).on('click', '#latest_carousel > div', function(){
                     moveToSelected($(this));
                 });
             });
