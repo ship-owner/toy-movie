@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,19 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
-            <a class="navbar-brand" href="index.jsp">The Movie</a>
+            <a class="navbar-brand" href="/movie/index">The Movie</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/movie/index">Index</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.jsp">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
+                    <sec:authorize access="isAnonymous()">
+                        <li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
+                    </sec:authorize>
+                    <sec:authorize access="!isAnonymous()">
+                            <li class="nav-item"><a class="nav-link" href="javascript:logout();"><sec:authentication property="principal.name"/></a></li>
+                    </sec:authorize>
+
                     <%--<li class="nav-item"><a class="nav-link" href="pricing.jsp">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link" href="faq.jsp">FAQ</a></li>
                     <li class="nav-item dropdown">
@@ -57,5 +64,19 @@
         </div>
     </div>
 </footer>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    function logout(){
+        $.ajax({
+            type: "POST",
+            url: "/user/logout",
+            success: function () {
+                alert("로그아웃되었습니다");
+                window.location.href = "/user/login";
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

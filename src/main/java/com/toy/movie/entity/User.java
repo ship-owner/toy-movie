@@ -1,15 +1,14 @@
 package com.toy.movie.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue
-    @Column(name = "id", updatable = false)
+    @Column(name = "user_id", updatable = false)
     private Long id;
 
     @Column(name = "name")
@@ -40,10 +39,20 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments = new ArrayList<>();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Column(name = "reg_date")
+    private Date regDate;
+
     @Builder
-    public User(String email, String password, String auth) {
+    public User(Long id, String email, String password, String name) {
+        this.id = id;
         this.email = email;
         this.password = password;
+        this.name = name;
     }
 
     @Override // 권한 반환
@@ -54,7 +63,7 @@ public class User implements UserDetails {
     // 사용자의 id 반환(고유한 값)
     @Override
     public String getUsername() {
-        return String.valueOf(email);
+        return String.valueOf(id);
     }
 
     // 사용자의 패스워드 반환
