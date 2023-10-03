@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * fileName       : SiteMeshConfig
  * author         : shipowner
  * date           : 2023-09-14
- * description    :
+ * description    : decorator 설정
  */
 
 @Configuration
@@ -20,7 +20,9 @@ public class SiteMeshConfig extends ConfigurableSiteMeshFilter {
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder
-                .addDecoratorPath("/*", 		"/default.jsp")
+                .addDecoratorPath("/*","/default.jsp")
+                .addExcludedPath("/error")
+                .addExcludedPath("/comment/*")
                 .setMimeTypes("text/html");
     }
 

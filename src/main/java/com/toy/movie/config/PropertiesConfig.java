@@ -8,7 +8,7 @@ import org.springframework.core.io.FileSystemResource;
 
 /**
  * packageName    : com.toy.movie.config
- * fileName       : PropertiesConfig.java
+ * fileName       : PropertiesConfig
  * author         : shipowner
  * date           : 2023-09-11
  * description    : 외부 환경 변수 불러오는 설정

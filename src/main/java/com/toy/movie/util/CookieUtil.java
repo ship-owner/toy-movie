@@ -3,7 +3,6 @@ package com.toy.movie.util;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
@@ -14,10 +13,9 @@ import org.springframework.util.StringUtils;
  * description    : 쿠키 처리 유틸
  */
 
-@Component
 public class CookieUtil {
 
-    private String DOMAIN_NAME;
+    private static String DOMAIN_NAME;
 
     /**
      * methodName : removeAllCookies
@@ -27,7 +25,7 @@ public class CookieUtil {
      * @param req the req
      * @param res the res
      */
-    public void removeAllCookies(HttpServletRequest req, HttpServletResponse res) {
+    public static void removeAllCookies(HttpServletRequest req, HttpServletResponse res) {
         Cookie[] cookies = req.getCookies();
         if(cookies != null)
         {
@@ -49,7 +47,7 @@ public class CookieUtil {
      * @param name the name
      * @param res  the res
      */
-    public void removeCookie(String name, HttpServletResponse res) {
+    public static void removeCookie(String name, HttpServletResponse res) {
         Cookie cookie = new Cookie(name, null);
         cookie.setMaxAge(0); // 유효시간 만료
         cookie.setPath("/");
@@ -70,7 +68,7 @@ public class CookieUtil {
      * @param res    the res
      * @param maxAge the max age
      */
-    public void setCookies(String name, String val, int maxAge, boolean httpOnly, HttpServletResponse res) {
+    public static void setCookies(String name, String val, int maxAge, boolean httpOnly, HttpServletResponse res) {
         Cookie cookie = new Cookie(name, val);
         cookie.setPath("/");
         cookie.setMaxAge(maxAge);
@@ -89,7 +87,7 @@ public class CookieUtil {
      *
      * @return list MovieDto
      */
-    public String getCookieVal(String name, HttpServletRequest req) {
+    public static String getCookieVal(String name, HttpServletRequest req) {
         String result = "";
         Cookie[] cookies = req.getCookies();
         // 읽은 쿠기 정보 출력하기
