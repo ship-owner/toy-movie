@@ -7,6 +7,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8" />
     <sitemesh:write property='head' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+        .search-box{
+            width: fit-content;
+            height: fit-content;
+            position: relative;
+        }
+        .input-search{
+            height: 50px;
+            width: 50px;
+            border-style: none;
+            padding: 10px;
+            font-size: 18px;
+            letter-spacing: 2px;
+            outline: none;
+            border-radius: 25px;
+            transition: all .5s ease-in-out;
+            background-color: #212529;
+            padding-right: 40px;
+            color:#fff;
+        }
+        .input-search::placeholder{
+            color:rgba(255,255,255,.5);
+            font-size: 18px;
+            letter-spacing: 2px;
+            font-weight: 100;
+        }
+        .btn-search{
+            width: 50px;
+            height: 50px;
+            border-style: none;
+            font-size: 20px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+            border-radius: 50%;
+            position: absolute;
+            right: 0px;
+            color:#ffffff ;
+            background-color:transparent;
+            pointer-events: painted;
+        }
+        .btn-search:focus ~ .input-search{
+            width: 500px;
+            border-radius: 0px;
+            background-color: transparent;
+            border-bottom:1px solid rgba(255,255,255,.5);
+            transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+        }
+        .input-search:focus{
+            width: 500px;
+            border-radius: 0px;
+            background-color: #212529;
+            border-bottom:1px solid rgba(255,255,255,.5);
+            transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
@@ -14,6 +71,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
             <a class="navbar-brand" href="/movie/index">The Movie</a>
+            <div class="search-box">
+                <form action="/movie/search">
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
+                    <input type="text" class="input-search" name="query" placeholder="영화 검색">
+                </form>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -73,6 +136,15 @@
             success: function () {
                 alert("로그아웃되었습니다");
                 window.location.href = "/user/login";
+            }
+        });
+    }
+
+    function search(){
+        $.ajax({
+            type: "GET",
+            url: "/movie/search",
+            success: function () {
             }
         });
     }

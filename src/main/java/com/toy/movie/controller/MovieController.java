@@ -72,4 +72,11 @@ public class MovieController {
         return movieService.getProviders();
     }
 
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView searchMovies(MovieSearchDto movieSearchDto){
+        ModelAndView mv = new ModelAndView("/movie/list");
+        mv.addObject("searchResult",movieService.searchMovies(movieSearchDto));
+        return mv;
+    }
 }

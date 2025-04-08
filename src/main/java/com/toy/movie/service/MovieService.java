@@ -1,6 +1,7 @@
 package com.toy.movie.service;
 
 import com.toy.movie.dto.MovieDto;
+import com.toy.movie.dto.MovieListDto;
 import com.toy.movie.dto.MovieSearchDto;
 import com.toy.movie.dto.ProviderDto;
 import com.toy.movie.external.TmdbApiModule;
@@ -64,6 +65,10 @@ public class MovieService {
         tmdbApiModule.findProviderByMovieId(movieDto);
 
         return movieDto;
+    }
+
+    public MovieListDto searchMovies(MovieSearchDto movieSearchDto){
+        return tmdbApiModule.searchMovies(movieSearchDto);
     }
 
 }

@@ -218,6 +218,13 @@
             h3{
                 font-size: inherit;
             }
+
+            #movie_trend .lead {
+                display: -webkit-box;
+                overflow:hidden;
+                -webkit-box-orient:vertical;
+                -webkit-line-clamp:6
+            }
         </style>
     </head>
     <body class="d-flex flex-column h-100">

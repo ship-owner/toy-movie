@@ -24,6 +24,7 @@ public class MovieSearchDto {
     private String page;
     private String year;
     private String region;
+    private String query;
     private String sortBy;
     private String releaseDateGte;
     private String releaseDateLte;

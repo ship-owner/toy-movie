@@ -325,6 +325,61 @@ public class TmdbApiModule {
         return movieList;
     }
 
+    public MovieListDto searchMovies(MovieSearchDto movieSearchDto){
+        MovieListDto movieListDto = null;
+
+        try {
+            String baseUrl = tmdbApiUrl + "/search/movie";
+
+            Map<String, String> queryParams = new HashMap<>();
+            queryParams.put("language", language);
+
+            if(StringUtils.isNotBlank(movieSearchDto.getQuery()))
+                queryParams.put("query",movieSearchDto.getQuery());
+            if(StringUtils.isNotBlank(movieSearchDto.getYear()))
+                queryParams.put("year",movieSearchDto.getYear());
+            if(StringUtils.isNotBlank(movieSearchDto.getPage()))
+                queryParams.put("page",movieSearchDto.getPage());
+            if(StringUtils.isNotBlank(movieSearchDto.getRegion()))
+                queryParams.put("region",movieSearchDto.getRegion());
+
+            String jsonData = this.getResponseText(baseUrl, queryParams);
+
+            if(StringUtils.isNotBlank(jsonData)) {
+                movieListDto = new MovieListDto();
+
+                JSONObject jsonObject = new JSONObject(jsonData);
+
+                if(jsonObject.has("results")) {
+                    String results = jsonObject.get("results").toString();
+
+                    ObjectMapper mapper = new ObjectMapper()
+                            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                            .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+
+                    movieListDto.setMovieList(Arrays.asList(mapper.readValue(results, MovieDto[].class)));
+
+                }
+
+                if(jsonObject.has("page")) {
+                    movieListDto.setPage(jsonObject.getInt("page"));
+                }
+
+                if(jsonObject.has("total_pages")) {
+                    movieListDto.setTotalPages(jsonObject.getInt("total_pages"));
+                }
+
+                if(jsonObject.has("total_results")) {
+                    movieListDto.setTotalResults(jsonObject.getInt("total_results"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return movieListDto;
+    }
+
     private String getResponseText(String baseUrl, Map<String, String> queryParams) {
         String responseText = null;
 
