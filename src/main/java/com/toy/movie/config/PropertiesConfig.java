@@ -1,5 +1,6 @@
 package com.toy.movie.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,13 @@ import org.springframework.core.io.FileSystemResource;
 @Configuration
 public class PropertiesConfig {
 
+    @Value("${movie.config.location}")
+    private String configLocation;
+
     @Bean(name = "movieProp")
     public PropertiesFactoryBean movieProperties() {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setLocation(new FileSystemResource("C:/java/workspace/study/config/movie.properties"));
+        propertiesFactoryBean.setLocation(new FileSystemResource(configLocation));
         return propertiesFactoryBean;
     }
 

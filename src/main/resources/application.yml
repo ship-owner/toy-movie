@@ -14,7 +14,7 @@ server:
 
 spring:
   config:
-    import: C:/java/workspace/study/config/config.yml
+    import: C:/java/study/config/config.yml
   mvc:
       servlet:
         path: /
@@ -45,3 +45,8 @@ spring:
 logging:
   level:
     org.hibernate.orm.jdbc.bind: trace
+
+
+movie:
+  config:
+    location: C:/java/study/config/movie.properties
